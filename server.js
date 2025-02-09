@@ -10,7 +10,8 @@ app.get("/", async (req, res) => {
             "https://api.openai.com/v1/chat/completions",
             {
                 model: "gpt-3.5-turbo",
-                messages: [{ role: "user", content: frage }]
+                messages: [{ role: "user", content: frage }],
+                max_tokens: 100
             },
             {
                 headers: {
@@ -22,6 +23,7 @@ app.get("/", async (req, res) => {
 
         res.send(response.data.choices[0].message.content);
     } catch (error) {
+        console.error("Fehler beim Abrufen der OpenAI API:", error);
         res.send("Fehler: OpenAI API nicht erreichbar.");
     }
 });
