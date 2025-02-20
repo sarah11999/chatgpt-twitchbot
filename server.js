@@ -2,14 +2,12 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 
-// Middleware, um sicherzustellen, dass Anfragen UTF-8 kodiert sind
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", async (req, res) => {
     let frage = req.query.frage;
 
-    // Falls "frage" leer ist oder nicht gesendet wurde, setze einen Standardwert
     if (!frage || frage.trim() === "") {
         frage = "Sag etwas Lustiges!";
     }
