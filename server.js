@@ -35,8 +35,13 @@ app.get("/", async (req, res) => {
             .replace(/&/g, "und")
             .replace(/%/g, " Prozent");
 
-        const gekürzteAntwort = antwort.substring(0, 400); // Antwort auf 400 Zeichen kürzen
-        res.send(gekürzteAntwort);
+        const maxLaenge = 400;
+if (antwort.length > maxLaenge) {
+    let letzteWoerter = antwort.substring(0, maxLaenge).split(" ");
+    letzteWoerter.pop(); // Letztes unvollständiges Wort entfernen
+    antwort = letzteWoerter.join(" ") + "..."; // "..." für besseren Übergang
+}
+res.send(antwort);
     } catch (error) {
         console.error("Fehler beim Abrufen der OpenAI API:", error);
         res.send("Fehler: OpenAI API nicht erreichbar.");
