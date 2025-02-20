@@ -21,7 +21,7 @@ app.get("/", async (req, res) => {
                 model: "gpt-3.5-turbo",
                 messages: [{ role: "user", content: frage }],
                 temperature: 0.7,
-                max_tokens: 400
+                max_tokens: 500
             },
             {
                 headers: {
@@ -32,10 +32,10 @@ app.get("/", async (req, res) => {
         );
 
       let antwort = response.data.choices[0].message.content
-    .replace(/\n/g, " ") // Entfernt Zeilenumbrüche
-    .replace(/"/g, "'") // Ersetzt doppelte Anführungszeichen
-    .replace(/&/g, "und") // Ersetzt "&" durch "und"
-    .replace(/%/g, " Prozent"); // Ersetzt "%"
+    .replace(/\n/g, " ")
+    .replace(/"/g, "'")
+    .replace(/&/g, "und")
+    .replace(/%/g, " Prozent");
 
 res.send(antwort);
     } catch (error) {
