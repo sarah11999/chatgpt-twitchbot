@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
             .replace(/&/g, "und")
             .replace(/%/g, " Prozent");
 
-        const maxLaenge = 400;
+        const maxLaenge = 380;
 if (antwort.length > maxLaenge) {
     let letzteWoerter = antwort.substring(0, maxLaenge).split(" ");
     letzteWoerter.pop(); // Letztes unvollständiges Wort entfernen
