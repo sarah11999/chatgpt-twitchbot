@@ -31,7 +31,13 @@ app.get("/", async (req, res) => {
             }
         );
 
-        res.send(response.data.choices[0].message.content);
+      let antwort = response.data.choices[0].message.content
+    .replace(/\n/g, " ") // Entfernt Zeilenumbrüche
+    .replace(/"/g, "'") // Ersetzt doppelte Anführungszeichen
+    .replace(/&/g, "und") // Ersetzt "&" durch "und"
+    .replace(/%/g, " Prozent"); // Ersetzt "%"
+
+res.send(antwort);
     } catch (error) {
         console.error("Fehler beim Abrufen der OpenAI API:", error);
         res.send("Fehler: OpenAI API nicht erreichbar.");
