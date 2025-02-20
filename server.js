@@ -19,7 +19,7 @@ app.get("/", async (req, res) => {
                 model: "gpt-3.5-turbo",
                 messages: [{ role: "user", content: frage }],
                 temperature: 0.7,
-                max_tokens: 400
+                max_tokens: 300
             },
             {
                 headers: {
@@ -35,9 +35,9 @@ app.get("/", async (req, res) => {
             .replace(/&/g, "und")
             .replace(/%/g, " Prozent");
 
-        const maxLaenge = 350;
+        const maxLaenge = 300;
 if (antwort.length > maxLaenge) {
-    let letzteWoerter = antwort.substring(0, maxLaenge).split(" ");
+   let letzteWoerter = antwort.slice(0, maxLaenge).split(/\s+/);
     letzteWoerter.pop(); // Letztes unvollständiges Wort entfernen
     antwort = letzteWoerter.join(" ") + "..."; // "..." für besseren Übergang
 }
