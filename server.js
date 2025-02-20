@@ -29,13 +29,14 @@ app.get("/", async (req, res) => {
             }
         );
 
-      let antwort = response.data.choices[0].message.content
-    .replace(/\n/g, " ")
-    .replace(/"/g, "'")
-    .replace(/&/g, "und")
-    .replace(/%/g, " Prozent");
+        let antwort = response.data.choices[0].message.content
+            .replace(/\n/g, " ")
+            .replace(/"/g, "'")
+            .replace(/&/g, "und")
+            .replace(/%/g, " Prozent");
 
-res.send(antwort);
+        const gekürzteAntwort = antwort.substring(0, 400); // Antwort auf 400 Zeichen kürzen
+        res.send(gekürzteAntwort);
     } catch (error) {
         console.error("Fehler beim Abrufen der OpenAI API:", error);
         res.send("Fehler: OpenAI API nicht erreichbar.");
